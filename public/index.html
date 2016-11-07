@@ -1,0 +1,62 @@
+<HTML>
+<HEAD></HEAD>
+
+<body> 
+
+
+<DIV ALIGN="Center" style="padding:5px; width:200px; border:1px solid blue">
+<FONT SIZE=+3 COLOR=Blue>C</FONT>loud  
+ <FONT SIZE=+3 COLOR=Blue>T</FONT>est
+ <FONT SIZE=+3 COLOR=Blue>F</FONT>oundation
+<BR><FONT size=-1 COLOR=grey>An IBM CPO Application</FONT>
+</DIV>
+
+<CENTER>
+<table border="1">
+  <caption><font size=+3 color='orange'>Dream Home Notification Commands</font></caption>
+  <tr>
+    <th>Application Commands</th>
+    <th>Command syntax</th>
+  </tr>
+  <tr>
+    <td><A HREF=/search>List all notifications</A></td>
+    <td>/search</td>
+  </tr>
+  <tr>
+    <td><A HREF=/reset>Clear all notifications</A></td>
+    <td>/reset</td>
+  </tr>
+
+  <TR></TR>
+  <tr>
+    <th>Mongo Database Commands</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><A HREF=/dbConnected>Check DB Connection</A></td>
+    <td>/dbConnected</td>
+  </tr>
+  <tr>
+    <td><A HREF=/createDB>Create Database</A></td>
+    <td>/createDB</td>
+  </tr>
+  <tr>
+    <td><A HREF=/resetDB>Reset Database</A></td>
+    <td>/resetDB</td>
+  </tr>
+</table>
+</CENTER>
+
+<P>Send a notification event
+<FORM enctype="application/json" action="/test3" method="post">
+  AgentId:<br>
+  <input type="text" name="agentId" value="1001"><br>
+  ClientId:<br>
+  <input type="text" name="clientId" value="1001"><br>
+  <input type="submit" value="Submit">
+</FORM>
+
+</body>
+</HTML>
+
+
