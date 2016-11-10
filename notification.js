@@ -79,7 +79,7 @@ helper.dbInit( function(err)
 //-----------------------------------------------------------------------------
 app.get('/reset', function (req, res) 
 {
-  var retjson = {"RC":_rcOK};       // assume a good json response
+  var retjson = {"RC":_rcOK};      // assume a good json response
   var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
   // test if connected to the DB
@@ -114,13 +114,13 @@ app.get('/reset', function (req, res)
 //-----------------------------------------------------------------------------
 app.get('/notify', function (req, res) 
 {
-   var retjson = {"RC":_rcOK};       // assume a good json response
+   var retjson = {"RC":_rcOK};      // assume a good json response
    var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
    // test if connected to the DB
    if(_dbConnected==true)
    { // connected to the DB
-     var jsonRecord;                  // the json record to be added to the collection
+     var jsonRecord;                // the json record to be added to the collection
 
      // check if queryParm has been sent?
      var queryObject = url.parse(req.url,true).query;
@@ -204,13 +204,13 @@ app.get('/notify', function (req, res)
 //-----------------------------------------------------------------------------
 app.get('/search', function (req, res)
 {
-   var retjson = {"RC":_rcOK};       // assume a good json response
+   var retjson = {"RC":_rcOK};      // assume a good json response
    var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
    // test if connected to the DB
    if(_dbConnected==true)
    { // connected to the DB
-     var dbQuery;                     // query used for looking up records in the collection
+     var dbQuery;                   // query used for looking up records in the collection
 
      // check if queryParm has been sent?
      var queryObject = url.parse(req.url,true).query;
@@ -252,7 +252,7 @@ app.get('/search', function (req, res)
 //-----------------------------------------------------------------------------
 app.get('/dbConnected', function(req, res)
 {
-  var retjson = {"RC":_rcOK};       // assume a good json response
+  var retjson = {"RC":_rcOK};      // assume a good json response
   var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
   // test if connected to the DB
