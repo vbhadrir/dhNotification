@@ -385,13 +385,22 @@ app.post('/test3', function (req, res)
   var retjson = {"RC":_rcOK};      // assume a good json response
   var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
-  //var postData = JSON.stringify(req.body);
-  var postData = JSON.stringify(req);
-  retjson.sucess = "Post Data ->" + postData;
+  // get the body for the put request
+  var body = [];
+  request.on('data', function(chunk) 
+  {
+    body.push(chunk);
+  }).on('end', function()
+  {
+    body = Buffer.concat(body).toString();
+    // at this point, `body` has the entire request body stored in it as a string
+    var postData = JSON.stringify(body);
+    retjson.sucess = "Post Data ->" + postData;
 
-  // send the http response message
-  res.status(statusCode).json(retjson);
-  res.end;
+    // send the http response message
+    res.status(statusCode).json(retjson);
+    res.end;
+  });
 
   return;
 });
