@@ -107,10 +107,11 @@ app.get('/reset', function (req, res)
 //-----------------------------------------------------------------------------
 // Sends a notification to an agent and writes it to the mongoDB           
 // Notification JSON record format is:
-// { "_id":"580e196acced882d43d4a286", "notificationId":"notification1001", "agentId":"agent1001", "clientId":"client1003" }
+// { "_id":580e196acced882d43d4a286, "notificationId":1001, "agentId":1001, "clientId":1003 }
 // 
 // syntax examples:
-//   /notify?agentId=1001,clientId=1001
+//   /notify?clientId=1001,agentId=1001
+//   /notify?clientId=1001
 //-----------------------------------------------------------------------------
 app.get('/notify', function (req, res) 
 {
@@ -124,10 +125,17 @@ app.get('/notify', function (req, res)
 
      // check if queryParm has been sent?
      var queryObject = url.parse(req.url,true).query;
-     var agentId     = queryObject.agentId;
      var clientId    = queryObject.clientId;
-     if(agentId && clientId)
-     { // we have the required parms
+     if(clientId)
+     { // we have the required clientId parm
+       // fetch the optional agentId parm
+       var agentId = queryObject.agentId;
+       if(!agentId)
+       { // missing optional agentId parm
+         // if no agentId we will set it to -1 to indicate no assigned agent yet.
+         agentId=-1;
+       }
+
        // create a unique pkId (primaryKeyId ) for the notification record
        helper.genNotificationId(
        function(err,pkId)
@@ -135,7 +143,7 @@ app.get('/notify', function (req, res)
          if(!err)
          { // notificationId generated successfully
            // add the record/row to the Notification collection
-           jsonRecord = { _id:pkId, 'notificationId':pkId, 'agentId':agentId, 'clientId':clientId};
+           jsonRecord = { notificationId:pkId, agentId:agentId, clientId:clientId};
            _crefNotification.insertOne( jsonRecord, {w:1, j:true},
            function(err,result)
            { 
@@ -197,10 +205,10 @@ app.get('/notify', function (req, res)
 //-----------------------------------------------------------------------------
 // Search for notification records within the notification collection in MongoDB
 // syntax examples:
-//   /search                                        get all records 
-//   /search?query={"clientId":"client1003"}        get records by clientID 
-//   /search?query={"agentId":"agent1001"}          get records by agentID 
-//   /search?query={"notificationId":"agent100"}    get records by notificationID 
+//   /search                                get all records 
+//   /search?query={"clientId":1003}        get records by clientID 
+//   /search?query={"agentId":1001}         get records by agentID 
+//   /search?query={"notificationId":1001}  get records by notificationID 
 //-----------------------------------------------------------------------------
 app.get('/search', function (req, res)
 {
