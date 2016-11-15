@@ -387,7 +387,7 @@ app.post('/test3', function (req, res)
 
   // get the body for the put request
   var body = [];
-  request.on('data', function(chunk) 
+  req.on('data', function(chunk) 
   {
     body.push(chunk);
   }).on('end', function()
