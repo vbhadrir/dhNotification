@@ -385,7 +385,8 @@ app.post('/test3', function (req, res)
   var retjson = {"RC":_rcOK};      // assume a good json response
   var statusCode = 200;            // assume valid http response code=200 (OK, good response)
 
-  var postData = JSON.stringify(req.body);
+  //var postData = JSON.stringify(req.body);
+  var postData = JSON.stringify(req);
   retjson.sucess = "Post Data ->" + postData;
 
   // send the http response message
