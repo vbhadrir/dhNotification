@@ -123,24 +123,22 @@ app.get('/notify', function (req, res)
    { // connected to the DB
      var jsonRecord;                // the json record to be added to the collection
 
-     // check if queryParm has been sent?
+     // ftech parms
      var queryObject = url.parse(req.url,true).query;
+     // get the manditory requied clientId parm
      var clientId    = queryObject.clientId;
-     if(clientId)
-     { // we have the required clientId parm
-       clientId=parseInt(clientId);
-       // fetch the optional agentId parm
-       var agentId = queryObject.agentId;
-       if(agentId)
-       {
-         agentId=parseInt(agentId);
-       }
-       else
-       { // missing optional agentId parm
-         // if no agentId we will set it to -1 to indicate no assigned agent yet.
-         agentId=-1;
-       }
+     clientId=parseInt(clientId);
+     // get the optional agentId parm
+     var agentId = queryObject.agentId;
+     agentId=parseInt(agentId);
+     if(!agentId)
+     { // missing optional agentId parm
+       // if no agentId we will set it to -1 to indicate no assigned agent yet.
+       agentId=-1;
+     }
 
+     if(clientId && agentId)
+     { // we have the required parms
        // create a unique pkId (primaryKeyId ) for the notification record
        helper.genNotificationId(
        function(err,pkId)
@@ -184,7 +182,7 @@ app.get('/notify', function (req, res)
      { // required parms missing
        retjson = {};
        retjson.RC = _rcError;
-       retjson.error = "Missing parms, valid syntax: .../notify?agentId=1001&clientId=1001";
+       retjson.error = "Missing or bad parms, valid syntax: .../notify?agentId=1001&clientId=1001";
     
        // set http status code
        statusCode = 400;
