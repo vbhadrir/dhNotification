@@ -128,9 +128,14 @@ app.get('/notify', function (req, res)
      var clientId    = queryObject.clientId;
      if(clientId)
      { // we have the required clientId parm
+       clientId=parseInt(clientId);
        // fetch the optional agentId parm
        var agentId = queryObject.agentId;
-       if(!agentId)
+       if(agentId)
+       {
+         agentId=parseInt(agentId);
+       }
+       else
        { // missing optional agentId parm
          // if no agentId we will set it to -1 to indicate no assigned agent yet.
          agentId=-1;
