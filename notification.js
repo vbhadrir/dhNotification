@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 //-----------------------------------------------------------------------------
 
-var _port = process.env.MSFDNOTIFICATION_SERVICE_PORT || 8080;       // port to listen on
+var _port = process.env.MSFDNOTIFICATION_SERVICE_PORT || 8081;       // port to listen on
 
 //-----------------------------------------------------------------------------
 // return code definitions, used in json responses {"RC": _rcOK}  
